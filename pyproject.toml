@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "trainer"
+version = "0.0.1"
+description = "General purpose trainer for ml"
+authors = ["Mayank Sinha <sinha.mayank900@gmail.com>"]
+license = "None"
+readme = "README.md"
+packages = [{include = "trainer"}]
+
+[tool.poetry.dependencies]
+python = "3.10.8"
+cmake = "^3.26.4"
+torch = ">=2.0.0, !=2.0.1"
+lightning = "^2.0.4"
+transformers = "^4.30.2"
+evaluate = "^0.4.0"
+scikit-learn = "^1.3.0"
+matplotlib = "^3.7.1"
+ruff = "^0.0.276"
+mlflow = "^2.4.1"
+polars = "^0.18.4"
+tensorrt = "8.5.3.1"
+datasets = "^2.13.1"
+huggingface-hub = "^0.16.4"
+peft = "^0.4.0"
+bitsandbytes = "^0.40.2"
+trl = "^0.4.7"
+sentencepiece = "^0.1.99"
+accelerate = "^0.21.0"
+jupyter = "^1.0.0"
+pyarrow = "^12.0.1"
+llvmlite = "^0.40.1"
+librosa = "^0.10.0.post2"
+einops = "^0.6.1"
+torchsummary = "^1.5.1"
+sounddevice = "^0.4.6"
+tensorboard = "^2.14.0"
+torchtext = "0.15.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
