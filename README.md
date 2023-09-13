@@ -17,3 +17,11 @@ poetry install
 ```
 pip install -r requirements.txt
 ```
+
+Dump all the audio files in a folder created as data.
+
+Run trainer:
+
+```
+python trainer.py
+```
