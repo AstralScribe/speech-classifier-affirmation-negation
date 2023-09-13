@@ -23,5 +23,5 @@ Dump all the audio files in a folder created as data.
 Run trainer:
 
 ```
-python trainer.py
+python main.py
 ```
