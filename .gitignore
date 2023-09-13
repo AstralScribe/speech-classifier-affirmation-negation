@@ -5,3 +5,4 @@ __pycache__/
 .ipynb_checkpoints/
 poetry.lock
 lightning_logs/
+tests/

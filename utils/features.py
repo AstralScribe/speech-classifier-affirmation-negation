@@ -19,7 +19,7 @@ def extract_features(data, sample_rate):
 
 
 def get_features(path, sample_rate:int = 24000) -> List[np.ndarray]:
-    data, _ = librosa.load(path, duration=10, sr=sample_rate)
+    data, _ = librosa.load(path, duration=15, sr=sample_rate)
     data = librosa.resample(data, orig_sr=sample_rate, target_sr=16000)
 
     res1 = extract_features(data, sample_rate=sample_rate)
