@@ -1,4 +1,6 @@
 import glob
+import os
+from datetime import datetime
 
 from lightning import Trainer
 from lightning.pytorch.callbacks import ModelCheckpoint
@@ -7,21 +9,29 @@ from torch.utils.data import DataLoader
 
 from trainer import AudioClassifier, AudioDataset
 
-
-SPLIT = 0.3
-MAX_EPOCHS = 10
+TRAINING_FILE_PATH = "data/"
+SPLIT = 0.2
+MAX_EPOCHS = 32
 WORKERS = 8
-BATCH_SIZE = 4
+BATCH_SIZE = 16
+VAL_BATCH_LIMIT = 8
+LEARNING_RATE = 1e-5
+
+now = datetime.now().strftime("%Y%m%d%H%M%S")
+
+if not os.path.exists("./out"):
+    os.mkdir("./out")
+os.mkdir(f"./out/model_{now}")
+
 
 checkpoint_callback = ModelCheckpoint(
     monitor="val_loss",
     save_top_k=2,
-    dirpath="out/",
-    filename="audio-classifier-{epoch:02d}-val_loss{val/loss:.2f}",
+    dirpath=f"out/model_{now}/",
+    filename="audio-classifier-{epoch:02d}",
 )
 
-files = glob.glob("data/*.wav")
-files = files[0:50]
+files = glob.glob(f"{TRAINING_FILE_PATH}/*.wav")
 train, test = train_test_split(files, shuffle=True, train_size=SPLIT)
 train_dataset = AudioDataset(train)
 test_dataset = AudioDataset(test)
@@ -48,11 +58,11 @@ print("Training started.")
 trainer = Trainer(
     max_epochs=MAX_EPOCHS,
     accumulate_grad_batches=1,
-    limit_val_batches=2,
+    limit_val_batches=VAL_BATCH_LIMIT,
     callbacks=[checkpoint_callback],
     # logger=logger,
 )
 
-classifier = AudioClassifier(learning_rate=1e-5, in_channels=162)
+classifier = AudioClassifier(learning_rate=LEARNING_RATE)
 
 trainer.fit(classifier, train_loader, test_loader)
