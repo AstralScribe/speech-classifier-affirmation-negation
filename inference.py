@@ -5,7 +5,7 @@ import torch
 
 CHECKPOINT = "out/audio-classifier-epoch=31-val_lossval"
 DEVICE = "cuda"
-model = AudioClassifier(0,162).to(DEVICE)
+model = AudioClassifier.load_from_checkpoint(CHECKPOINT).to(DEVICE)
 model.eval()
 
 def run_inference(path, sample_rate):
@@ -26,4 +26,4 @@ def run_inference(path, sample_rate):
 
 file = ""
 sr = 24000
-print(run_inference(file, sr))
+print(run_inference(file, 24000))

@@ -54,7 +54,7 @@ class AudioDataset(Dataset):
 
 
 class AudioClassifier(pl.LightningModule):
-    def __init__(self, learning_rate: float, in_channels: int = 162) -> None:
+    def __init__(self, learning_rate: float = 1e-3, in_channels: int = 162) -> None:
         super().__init__()
         self.LR = learning_rate
         self.model = model.AudioClassifierModel(in_channels)
